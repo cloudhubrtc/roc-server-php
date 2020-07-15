@@ -1,17 +1,14 @@
-<?php
-require_once 'Token.php';
+<?php declare(strict_types=1);
 
 class Client
 {
     private $authKey;
     private $secretKey;
-    private $apiDomain;
 
     public function __construct($authKey, $secretKey)
     {
         $this->authKey = $authKey;
         $this->secretKey = $secretKey;
-        $this->apiDomain = 'http://www.com/api';
     }
 
     /**
@@ -24,8 +21,21 @@ class Client
     {
         $bodyStr = $this->authKey . "authkey" . $this->authKey . "channame" . $channelName . "timestamp" . $expireTime . "userid" . $userId;
         $encodeStr = md5(md5($bodyStr) . md5($this->secretKey));
-        $token = new Token($encodeStr, $expireTime, 'reserve', 'reserve');
-        return $token->getBase64Str() . Token::randomStr(16);
+        $tokenArr = [
+            'token' => $$encodeStr,
+            'timestamp' => $expireTime,
+        ];
+        return base64_encode(json_encode($tokenArr)) . self::randomStr(16);
+    }
+
+    static public function randomStr($count)
+    {
+        $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
+        $str = '';
+        for ($i = 0; $i < $count; $i++) {
+            $str .= $pattern{mt_rand(0, 35)};
+        }
+        return $str;
     }
 
 
