@@ -1,8 +1,22 @@
-# 概述
+## 概述
 
 该项目是 PAAS 层服务器对服务器 SDK。
 
 平台为用户发放的 `AuthKey` 与 `SecretKey` 请使用者妥善保管，不要泄露给其他人，否则将遭受一定的经济损失。
+
+## 文档 
+
+[API文档 - Token生成](http://apidoc.roadofcloud.net/#/token)
+
+## 安装
+
+### 手动安装
+
+将 roc 文件夹中文件拷贝到项目路径即可。
+
+### Composer 安装
+
+请稍等片刻
 
 ## 使用
 
