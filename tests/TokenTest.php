@@ -16,8 +16,12 @@ final class TokenTest extends TestCase
         $client = new Client(self::AuthKey, self::SecretKey);
         $authToken = $client->getToken(self::ChannelName, self::UserId, self::ExpiredTime);
 
+        # 删除掩码
+        $authToken = substr($authToken, 0, -16);
+
+
         $this->assertEquals(
-            'user@example.com',
+            'eyJ0b2tlbiI6IjBiNDkzZTVjN2FjMjM2OThkOWNkYTJhZmMzNGUyMTQyIiwidGltZXN0YW1wIjoxNTk0NzA0ODkxfQ==',
             $authToken
         );
     }

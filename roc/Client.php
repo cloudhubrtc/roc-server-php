@@ -22,7 +22,7 @@ class Client
         $bodyStr = $this->authKey . "authkey" . $this->authKey . "channame" . $channelName . "timestamp" . $expireTime . "userid" . $userId;
         $encodeStr = md5(md5($bodyStr) . md5($this->secretKey));
         $tokenArr = [
-            'token' => $$encodeStr,
+            'token' => $encodeStr,
             'timestamp' => $expireTime,
         ];
         return base64_encode(json_encode($tokenArr)) . self::randomStr(16);
